@@ -32,3 +32,4 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return '2241720058 - Dela Farahita Zain';
 });
+
