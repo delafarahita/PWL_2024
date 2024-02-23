@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,26 +18,39 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/hello', function () {
-    return 'Hello World';
-});
+Route::get('/hello', [WelcomeController::class,'hello']);
+Route::get('/world', [PageController::class,'world']);
+Route::get('/index', [HomeController::class,'index']);
+Route::get('/about', [AboutController::class,'about']);
+Route::get('/articles/{id}', [ArticleController::class,'articles']);
 
-Route::get('/world', function () {
-    return 'World';
-});
+Route::resource('photos', PhotoController::class);
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show'
+]);
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
 
-Route::get('/', function () {
-    return 'Selamat Datang';
-});
+// Route::get('/hello', function () {
+//     return 'Hello World';
+// });
 
-Route::get('/about', function () {
-    return '2241720058 - Dela Farahita Zain';
-});
+// Route::get('/world', function () {
+//     return 'World';
+// });
+
+// Route::get('/', function () {
+//     return 'Selamat Datang';
+// });
+
+// Route::get('/about', function () {
+//     return '2241720058 - Dela Farahita Zain';
+// });
 
 // Route Parameters
 
@@ -43,9 +62,9 @@ Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
     return 'Pos ke-' . $postId . " Komentar ke-: " . $commentId;
 });
 
-Route::get('/articles/{id}', function ($articlesId) {
-    return 'Halaman Artikel dengan ID ' . $articlesId;
-});
+// Route::get('/articles/{id}', function ($articlesId) {
+//     return 'Halaman Artikel dengan ID ' . $articlesId;
+// });
 
 // Optional Parameters
 
@@ -62,3 +81,4 @@ Route::get('/user/{name?}', function ($name = 'John') {
 Route::get('/user/profile', function () {
     //
 })->name('profile');
+
