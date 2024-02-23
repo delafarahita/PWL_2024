@@ -82,3 +82,9 @@ Route::get('/user/profile', function () {
     //
 })->name('profile');
 
+// 4. View
+// Route::get('/greeting', function () {
+//     return view('blog.hello', ['name' => 'Dela']);
+// });
+
+Route::get('/greeting', [WelcomeController::class,'greeting']);
